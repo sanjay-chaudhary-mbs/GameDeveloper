@@ -382,31 +382,6 @@
         }
 
         /* Projects Section */
-        .projects-filter {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 25px;
-            background: var(--card-bg);
-            border: none;
-            border-radius: 30px;
-            color: var(--text);
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -567,7 +542,7 @@
             transform: rotate(90deg);
         }
 
-        /* Skills Section */
+        /* Skills Section - Enhanced with Icons and Ellipse Highlight */
         .skills-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -597,35 +572,79 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+            z-index: 2;
         }
 
         .skill-category h3 i {
-            font-size: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
         }
 
         .skill-item {
-            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 10px;
+            border-radius: 50px;
+            background: rgba(30, 30, 30, 0.7);
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+        }
+
+        .skill-item:hover::before {
+            opacity: 1;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            /* 30% larger than text */
+            margin-bottom: 12px;
+            color: var(--accent);
+            transition: all 0.4s ease;
+        }
+
+        .skill-item:hover .skill-icon {
+            color: white;
+            transform: scale(1.3);
+            /* 30% larger on hover */
         }
 
         .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
             font-size: 1.1rem;
+            text-align: center;
+            transition: color 0.4s ease;
         }
 
-        .skill-bar {
-            height: 10px;
-            background: #222;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
-            border-radius: 5px;
-            transition: width 1.5s ease;
+        .skill-item:hover .skill-name {
+            color: white;
+            font-weight: 500;
         }
 
         /* Contact Section */
@@ -971,6 +990,10 @@
             .video-container iframe {
                 height: 300px;
             }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
         }
 
         @media (max-width: 576px) {
@@ -988,6 +1011,10 @@
 
             .project-links {
                 flex-direction: column;
+            }
+
+            .skill-category {
+                padding: 20px;
             }
         }
     </style>
@@ -1021,7 +1048,7 @@
             <div class="hero-content" data-aos="fade-up" data-aos-delay="300">
                 <h1>Creating Immersive Game Experiences</h1>
                 <p class="tagline">A Game Developer | <span class="typed-text">AR/VR Enthusiast</span></p>
-                <p class="section-subtitle">With <b><I>3+ years of experience</b></I>, I design and develop engaging
+                <p class="section-subtitle">With <b><I>3+ years of experience</b></I>, I develop engaging
                     games and
                     interactive experiences for Android,IOS,Windows,WebGL,
                     and AR/VR platforms—blending creativity with cutting-edge technology.</p>
@@ -1085,40 +1112,9 @@
             <p class="section-subtitle">Explore my featured projects that showcase my skills in game development and
                 interactive experiences.</p>
 
-            <!-- <div class="projects-filter">
-                <button class="filter-btn active">All Projects</button>
-                <button class="filter-btn">Mobile</button>
-                <button class="filter-btn">WebGL</button>
-                <button class="filter-btn">AR/VR</button>
-                <button class="filter-btn">Multiplayer</button>
-            </div> -->
-
             <div class="projects-grid">
+                <!-- CultSport Play -->
                 <div class="project-card" data-aos="zoom-in">
-                    <img src="https://images.unsplash.com/photo-1501003878151-d3cb87799705?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Mob Rummy" class="project-img">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Unity</span>
-                            <span class="project-tag">iOS/Android</span>
-                            <span class="project-tag">Multiplayer</span>
-                        </div>
-                        <h3>Mob Rummy</h3>
-                        <p>A sophisticated multiplayer card game supporting 2–6 players with real-time gameplay, built
-                            for Android using Unity with Photon for networking.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fas fa-play"></i> Play Demo
-                            </a>
-                            <a href="#" class="project-link secondary"
-                                data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                                <i class="fab fa-youtube"></i> Watch Video
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80"
                         alt="CultSport Play" class="project-img">
                     <div class="project-content">
@@ -1128,22 +1124,28 @@
                             <span class="project-tag">Fitness</span>
                         </div>
                         <h3>CultSport Play</h3>
-                        <p>An innovative virtual fitness app that gamifies workouts with achievements and social
-                            features, available on Play Store with 100K+ downloads.</p>
+                        <p>A gamified virtual fitness application featuring reward-based workout sessions, real-time
+                            tracking, and multiplayer fitness challenges.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity3D, Firebase, Play Services, REST API,
+                            Achievements, Leaderboards</p>
+                        <p><strong>My Role:</strong> Lead Developer – handled game logic, integration with fitness APIs,
+                            and
+                            multiplayer matchmaking.</p>
                         <div class="project-links">
                             <a href="https://play.google.com/store/apps/details?id=com.fitplus.game"
                                 class="project-link" target="_blank">
                                 <i class="fab fa-google-play"></i> Play Store
                             </a>
                             <a href="#" class="project-link secondary"
-                                data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                                data-video="https://www.youtube.com/embed/example1">
                                 <i class="fab fa-youtube"></i> Watch Video
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                <!-- DoSpace -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80"
                         alt="DoSpace" class="project-img">
                     <div class="project-content">
@@ -1153,39 +1155,173 @@
                             <span class="project-tag">iOS/Android</span>
                         </div>
                         <h3>DoSpace</h3>
-                        <p>AR-based room measurement tool for Android and iOS using Unity 3D and ARCore/ARKit, featuring
-                            precise measurements and floor plan generation.</p>
+                        <p>An augmented reality room measuring app that uses device cameras to generate accurate floor
+                            plans
+                            and spatial layouts.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity3D, ARCore/ARKit, Plane Detection, SLAM, Floor
+                            Plan
+                            Generator</p>
+                        <p><strong>My Role:</strong> AR Developer – responsible for AR measurement logic, UX flows, and
+                            floor plan visualization.</p>
                         <div class="project-links">
                             <a href="#" class="project-link">
                                 <i class="fas fa-video"></i> Demo Video
                             </a>
                             <a href="#" class="project-link secondary"
-                                data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                                data-video="https://www.youtube.com/embed/example2">
                                 <i class="fab fa-youtube"></i> Watch Video
                             </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- Mob Rummy -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1501003878151-d3cb87799705?q=80&w=2070&auto=format&fit=crop"
+                        alt="Mob Rummy" class="project-img">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">iOS/Android</span>
+                            <span class="project-tag">Multiplayer</span>
+                        </div>
+                        <h3>Mob Rummy</h3>
+                        <p>A multiplayer online card game that supports real-time gameplay with 2–6 players. Developed
+                            with
+                            scalable networking.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity3D, Photon PUN2, Lobby System, Socket-based
+                            Multiplayer</p>
+                        <p><strong>My Role:</strong> Multiplayer Game Developer – handled room creation, matchmaking,
+                            and
+                            turn-based logic.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-play"></i> Play Demo
+                            </a>
+                            <a href="#" class="project-link secondary"
+                                data-video="https://www.youtube.com/embed/example3">
+                                <i class="fab fa-youtube"></i> Watch Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jet Engine (VR) -->
                 <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
                     <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=800&q=80"
                         alt="Machine Module VR" class="project-img">
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="project-tag">Unity</span>
-                            <span class="project-tag">VR/Meta Quest 2</span>
+                            <span class="project-tag">VR/Meta Quest</span>
                             <span class="project-tag">Education</span>
                         </div>
-                        <h3>Machine Module (VR)</h3>
-                        <p>Educational VR application with 4 interactive views of industrial machinery, developed for
-                            Oculus Quest with detailed 3D models and animations.</p>
+                        <h3>Jet Engine (VR)</h3>
+                        <p>Industrial training VR application showcasing real-world machinery simulations with
+                            interactive
+                            learning modules.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity XR Toolkit, Meta Quest SDK, 3D Modeling, VR
+                            Interactions</p>
+                        <p><strong>My Role:</strong> VR Developer – created immersive interactions and optimized 3D
+                            assets
+                            for performance.</p>
+                        <!-- Embed YouTube video directly -->
+                        <div class="video-wrapper" style="margin-top: 1rem;">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/koCohKdcVD4?si=GTKK3ELmHUQoqiiH"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pier cap in construction(VR) -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://plus.unsplash.com/premium_photo-1736056426921-e0957ea70695?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Machine Module VR" class="project-img">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">VR/Meta Quest</span>
+                            <span class="project-tag">Education</span>
+                        </div>
+                        <h3>Pier cap in construction (VR)</h3>
+                        <p>Industrial training VR application showcasing real-world machinery simulations with
+                            interactive
+                            learning modules.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity XR Toolkit, Meta Quest SDK, 3D Modeling, VR
+                            Interactions</p>
+                        <p><strong>My Role:</strong> VR Developer – created immersive interactions and optimized 3D
+                            assets
+                            for performance.</p>
+
+                        <!-- Embed YouTube video directly -->
+                        <div class="video-wrapper" style="margin-top: 1rem;">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/mNyrBuKNMio?si=rDoUXJEVUUWW3kfQ"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prime Ludo -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://plus.unsplash.com/premium_photo-1718879381555-65f698359b53?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Prime Ludo" class="project-img">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">Multiplayer</span>
+                            <span class="project-tag">Board Game</span>
+                        </div>
+                        <h3>Prime Ludo</h3>
+                        <p>Online Ludo game with custom boards, avatars, and support for private/public matches.
+                            Optimized
+                            for mobile devices.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity3D, Photon Fusion, Custom Matchmaking,
+                            Real-Time
+                            Sync</p>
+                        <p><strong>My Role:</strong> Full Stack Game Developer – led gameplay development and UI/UX
+                            design.
+                        </p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1cu-fPIIFzMNck_CUxdBBK02_ea--08-X/view"
-                                class="project-link" target="_blank">
-                                <i class="fas fa-eye"></i> View Demo
+                            <a href="#" class="project-link">
+                                <i class="fas fa-play"></i> Play Demo
                             </a>
                             <a href="#" class="project-link secondary"
-                                data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                                data-video="https://www.youtube.com/embed/example5">
+                                <i class="fab fa-youtube"></i> Watch Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swift Jackpot -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1706129867447-b4f156c46641?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="Swift Jackpot" class="project-img">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">Casino</span>
+                            <span class="project-tag">Multiplayer</span>
+                        </div>
+                        <h3>Swift Jackpot</h3>
+                        <p>A real-time multiplayer casino experience offering slots, roulette, and jackpot rooms with
+                            animated visual effects.</p>
+                        <p><strong>Technologies & Methods:</strong> Unity3D, Photon, Firebase, Reward System, In-App
+                            Purchases</p>
+                        <p><strong>My Role:</strong> Game Programmer – developed gameplay logic and backend integration
+                            for
+                            leaderboards and purchases.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-coins"></i> Play Now
+                            </a>
+                            <a href="#" class="project-link secondary"
+                                data-video="https://www.youtube.com/embed/example6">
                                 <i class="fab fa-youtube"></i> Watch Video
                             </a>
                         </div>
@@ -1195,130 +1331,183 @@
         </section>
     </div>
 
-    <!-- Skills Page -->
+    <!-- Skills Page - Enhanced with Icons and Ellipse Highlight -->
     <div id="skills" class="page">
         <section data-aos="fade-up">
             <h2>Technical Expertise</h2>
-            <p class="section-subtitle">My skills and technologies I specialize in for game development and interactive
-                experiences.</p>
+            <p class="section-subtitle">
+                My skills and technologies I specialize in for game development and interactive experiences.
+            </p>
 
             <div class="skills-container">
+                <!-- 1. Programming Languages -->
                 <div class="skill-category" data-aos="fade-right">
-                    <h3><i class="fas fa-gamepad"></i> Game Development</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Unity 2D/3D</span>
-                            <span>95%</span>
+                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-cuttlefish"></i></div>
+                            <span class="skill-name">C</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-cuttlefish"></i></div>
+                            <span class="skill-name">C++</span>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Unreal Engine</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Game Design</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Shader Programming</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-cuttlefish"></i></div>
+                            <span class="skill-name">C#</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. Version Tools -->
                 <div class="skill-category" data-aos="fade-right" data-aos-delay="100">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>C#</span>
-                            <span>95%</span>
+                    <h3><i class="fas fa-code-branch"></i> Version Tools</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <span class="skill-name">Git</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <span class="skill-name">Source Tree</span>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>C++</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>JavaScript</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Python</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 65%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-github"></i></div>
+                            <span class="skill-name">Github Desktop</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- 3. SDKs -->
+                <div class="skill-category" data-aos="fade-right" data-aos-delay="150">
+                    <h3><i class="fas fa-plug"></i> SDKs</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-facebook"></i></div>
+                            <span class="skill-name">Facebook Login</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-google"></i></div>
+                            <span class="skill-name">Google Login</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-fire"></i></div>
+                            <span class="skill-name">Firebase</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-cube"></i></div>
+                            <span class="skill-name">DOTween</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-vr-cardboard"></i></div>
+                            <span class="skill-name">OpenXR</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-vr-cardboard"></i></div>
+                            <span class="skill-name">Oculus</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-vr-cardboard"></i></div>
+                            <span class="skill-name">MockHMD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. IDEs -->
                 <div class="skill-category" data-aos="fade-right" data-aos-delay="200">
-                    <h3><i class="fas fa-vr-cardboard"></i> AR/VR</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Unity XR</span>
-                            <span>90%</span>
+                    <h3><i class="fas fa-desktop"></i> IDEs</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+                            <span class="skill-name">Visual Studio</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-apple"></i></div>
+                            <span class="skill-name">Xcode</span>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>ARCore/ARKit</span>
-                            <span>85%</span>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-android"></i></div>
+                            <span class="skill-name">Android Studio</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>WebXR</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <span class="skill-name">VS Code</span>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Oculus SDK</span>
-                            <span>75%</span>
+                </div>
+
+                <!-- 5. Packages -->
+                <div class="skill-category" data-aos="fade-right" data-aos-delay="250">
+                    <h3><i class="fas fa-box-open"></i> Unity Packages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-box"></i></div>
+                            <span class="skill-name">Asset Bundle</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-box"></i></div>
+                            <span class="skill-name">Addressable Assets</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-wifi"></i></div>
+                            <span class="skill-name">Remote Config</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Operating Systems -->
+                <div class="skill-category" data-aos="fade-right" data-aos-delay="300">
+                    <h3><i class="fas fa-laptop"></i> Operating Systems</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-windows"></i></div>
+                            <span class="skill-name">Windows</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-apple"></i></div>
+                            <span class="skill-name">macOS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Technologies -->
+                <div class="skill-category" data-aos="fade-right" data-aos-delay="350">
+                    <h3><i class="fas fa-cogs"></i> Technologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-unity"></i></div>
+                            <span class="skill-name">Unity3D</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-apple"></i></div>
+                            <span class="skill-name">iOS</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-android"></i></div>
+                            <span class="skill-name">Android</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-vr-cardboard"></i></div>
+                            <span class="skill-name">Meta Quest 2</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-globe"></i></div>
+                            <span class="skill-name">WebGL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Multiplayer -->
+                <div class="skill-category" data-aos="fade-right" data-aos-delay="400">
+                    <h3><i class="fas fa-network-wired"></i> Multiplayer</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-plug"></i></div>
+                            <span class="skill-name">Socket</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                            <span class="skill-name">Photon</span>
                         </div>
                     </div>
                 </div>
@@ -1330,7 +1519,8 @@
     <div id="contact" class="page">
         <section data-aos="fade-up">
             <h2>Let's Connect</h2>
-            <p class="section-subtitle">Have a project in mind or want to discuss game development? Get in touch with
+            <p class="section-subtitle">Have a project in mind or want to discuss game development? Get in touch
+                with
                 me!</p>
 
             <div class="contact-grid">
@@ -1338,27 +1528,19 @@
                     <h3>Contact Information</h3>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:sanjaychaudharyskn@gmail.com">sanjay12345@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+919502828383">+91 9502828383</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>New Delhi, India</span>
+                        <a href="mailto:sanjaychaudharyskn@gmail.com">sanjaychaudharyskn@gmail.com</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-itch-io"></i>
-                        <a href="https://sanjaychaudhary.itch.io" target="_blank">sanjaychaudhary.itch.io</a>
+                        <a href="https://sanjaychaudhary.itch.io" target="_blank">itch.io</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
-                        <a href="https://github.com/yourusername" target="_blank">github.com/sanjay-dev</a>
+                        <a href="https://github.com/yourusername" target="_blank">github.com</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/sanjay-dev</a>
+                        <a href="https://www.linkedin.com/in/sanjaychaudharyskn" target="_blank">linkedin.com</a>
                     </div>
                 </div>
 
@@ -1419,16 +1601,13 @@
                 <a href="https://github.com/yourusername" class="social-link" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <a href="https://www.linkedin.com/in/sanjaychaudharyskn" class="social-link" target="_blank">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://twitter.com/yourusername" class="social-link" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://sanjaychaudhary.itch.io" class="social-link" target="_blank">
+                <a href="https://itch.io/profile/sanjaychaudhary" class="social-link" target="_blank">
                     <i class="fab fa-itch-io"></i>
                 </a>
-                <a href="https://youtube.com/yourusername" class="social-link" target="_blank">
+                <a href="https://www.youtube.com/@sanjaychaudharyskn" class="social-link" target="_blank">
                     <i class="fab fa-youtube"></i>
                 </a>
             </div>
@@ -1542,31 +1721,6 @@
 
             particlesContainer.appendChild(particle);
         }
-
-        // Animate skill bars on scroll
-        const skillBars = document.querySelectorAll('.skill-progress');
-
-        function animateSkillBars() {
-            skillBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
-            });
-        }
-
-        // Use Intersection Observer to trigger animation when skills section is in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateSkillBars();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        observer.observe(document.getElementById('skills'));
 
         // Typewriter effect for tagline
         const typedTextSpan = document.querySelector('.typed-text');
